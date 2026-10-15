@@ -26,3 +26,7 @@ print("→number of duplicates\n", df.duplicated().sum())
 
 #number of people that survived
 print("→number of people who survived:\n", df["survived"].value_counts())
+
+#save the dataset
+df.to_csv("data/raw/titanic.csv", index=False)
+print("saved dataset")
