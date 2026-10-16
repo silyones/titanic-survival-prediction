@@ -23,3 +23,6 @@ df["embarked"] = df["embarked"].fillna(df["embarked"].mode()[0])
 #check missing columns after cleaning
 print("→ columns after cleaning:\n", df.isnull().sum())
 
+
+
+
