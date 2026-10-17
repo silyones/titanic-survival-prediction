@@ -24,5 +24,3 @@ df["embarked"] = df["embarked"].fillna(df["embarked"].mode()[0])
 print("→ columns after cleaning:\n", df.isnull().sum())
 
 
-
-
