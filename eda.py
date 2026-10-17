@@ -40,8 +40,50 @@ sns.barplot(data= df,
 x = "pclass",
 y = "survived",
 ax = axes[0,2])
-axes.set_title("survival by class")
+axes[0,2].set_title("survival by class")
 
-# age distribution 
+# age distribution for survivors and non survivors
+sns.histplot(
+    data = df,
+    x = "age",
+    hue = "survived",
+    bins = 30,
+    ax = axes[1,0]
+)
+axes[1,0].set_title("age distribution by survivors")
 
+#fare by survived
+sns.boxplot(
+    data = df,
+    x = "survived",
+    y = "fare",
+    ax = axes[1,1]
+)
+axes[1,1].set_title("fare by survived")
 
+#survival by sex and class together
+sns.barplot(
+    data = df,
+    x = "pclass",
+    y = "survived",
+    hue = "sex",
+    ax = axes[1,2]
+)
+axes[1,2].set_title("survival by sex and class")
+
+plt.tight_layout()
+plt.savefig("plot/eda.png")
+plt.show()
+
+#correlation heat map
+plt.figure(figsize=(7,5))
+sns.heatmap(
+    df.corr(numeric_only=True),
+    annot = True,
+    cmap = "coolwarm",
+    fmt = ".2f"
+)
+
+plt.tight_layout()
+plt.savefig("plot/correlation_map.png")
+plt.show()
