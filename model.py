@@ -37,6 +37,11 @@ rf_model_pred = rf_model.predict(x_test)
 
 # evaluation metrics
 print("→ accuracy of logistic regression model: ", accuracy_score(y_test,log_model_pred))
+print("→ precision of logistic regression model: ", precision_score(y_test,log_model_pred))
+print("→ recall of logistic regression model: ", recall_score(y_test,log_model_pred))
+print("→ confusion matrix of logistic regression model: ", confusion_matrix(y_test,log_model_pred))
 
-
-
+print("→ accuracy of random forest model: ", accuracy_score(y_test,log_model_pred))
+print("→ precision of random forest model: ", precision_score(y_test,log_model_pred))
+print("→ recall of random forest model: ", recall_score(y_test,log_model_pred))
+print("→ confusion matrix of random forest model: ", confusion_matrix(y_test,log_model_pred))
