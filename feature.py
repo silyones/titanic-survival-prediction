@@ -24,3 +24,22 @@ print("→ after encoding:\n", df.head())
 x = df.drop("survived", axis = 1)
 y = df["survived"]
 
+#create a split
+x_train,x_test,y_train,y_test = train_test_split(
+    x,
+    y,
+    test_size = 0.2,
+    random_state = 42,
+    stratify = y
+)
+
+print("→ train shape: ", x_train.shape)
+print("→ survival rate in y_train: ", y_train.mean())
+print("→ survival rate in y_test: ", y_test.mean())
+
+#save data
+x_train.to_csv("data/train/x_train.csv", index=False)
+y_train.to_csv("data/train/y_train.csv", index=False)
+
+x_test.to_csv("data/test/x_test.csv", index=False)
+y_test.to_csv("data/test/y_test.csv", index=False)
