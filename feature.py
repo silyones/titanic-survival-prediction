@@ -20,3 +20,7 @@ df = pd.get_dummies(
 
 print("→ after encoding:\n", df.head())
 
+#seperate input(x) and target(y)
+x = df.drop("survived", axis = 1)
+y = df["survived"]
+
