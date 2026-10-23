@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
+import seaborn as sns
 from sklearn.metrics import classification_report, ConfusionMatrixDisplay
 
 
@@ -53,6 +54,38 @@ plt.title("Confusion Matrix — Random Forest Model")
 plt.savefig("plot/confusion_matrix_rf_model")
 plt.show()
 
+# random forest feature importance
+importance = pd.Series(
+    rf_model.feature_importances_,
+    index = x_train.columns
+).sort_values()
+
+# print the importance score
+print("Random Forest importance score:\n")
+print(importance.sort_values(ascending=False).round(3))
+
+'''OUTPUT:
+Random Forest importance score:
+
+fare          0.275
+sex           0.265
+age           0.251
+pclass        0.085
+sibsp         0.050
+parch         0.039
+embarked_S    0.023
+embarked_Q    0.012
+'''
+# bar chart to show feature importance
+sns.barplot(
+    x = importance.values,
+    y = importance.index
+)
+plt.xlabel("Importance score")
+plt.ylable("Feature")
+plt.title("Feature importance in Random Forest")
+plt.savefig("plot/feature_importance.png")
+plt.show()
 
 
 """
