@@ -27,3 +27,4 @@ print("→ columns after cleaning:\n", df.isnull().sum())
 df.to_csv("data/processed/clean_titanic.csv", index=False)
 print("saved")
 
+
