@@ -1,7 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import joblib
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay
+
+
 
 #load datasest
 x_train = pd.read_csv("data/train/x_train.csv")
@@ -28,6 +30,30 @@ for name, model in models.items():
         model.predict(x_test),
         target_names = ["did not survive", "survived"]
     )) 
+
+# confusion matrix for logistic regression
+ConfusionMatrixDisplay.from_estimator(
+    log_model,
+    x_test,
+    y_test,
+    display_labels=["did not survive", "survived"]
+)
+plt.title("Confusion Matrix — Logistic Regression Model")
+plt.save("plot/confusion_matrix_log_model")
+
+
+# confusion matrix for random forest model
+ConfusionMatrixDisplay.from_estimator(
+    rf_model,
+    x_test,
+    y_test,
+    display_labels=["did not survive","survived"]
+)
+plt.title("Confusion Matrix — Random Forest Model")
+plt.save("plot/confusion_matrix_rf_model")
+plt.show()
+
+
 
 """
 Iteration	name	              model
