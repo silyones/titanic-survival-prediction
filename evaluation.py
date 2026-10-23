@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import joblib
 import seaborn as sns
 from sklearn.metrics import classification_report, ConfusionMatrixDisplay
-
+from sklearn.model_selection import cross_val_score, StratifiedKFold
 
 
 #load datasest
@@ -31,6 +31,8 @@ for name, model in models.items():
         model.predict(x_test),
         target_names = ["did not survive", "survived"]
     )) 
+
+
 
 # confusion matrix for logistic regression
 ConfusionMatrixDisplay.from_estimator(
@@ -87,6 +89,80 @@ plt.title("Feature importance in Random Forest")
 plt.savefig("plot/feature_importance.png")
 plt.show()
 
+
+# logistic regression coefficient
+#Logistic Regression learns a coefficient for each feature during training
+coef = pd.Series(
+    log_model.coef_[0],
+    index = x_train.columns
+)
+
+print("logistic regression coefficient:\n",coef.sort_values(ascending=False).round(3))
+
+'''OUTPUT:
+logistic regression coefficient:
+ sex           2.559
+embarked_Q    0.280
+fare          0.002
+age          -0.039
+parch        -0.071
+sibsp        -0.244
+embarked_S   -0.382
+pclass       -1.092
+'''
+
+# cross validation
+cv = StratifiedKFold(
+    n_splits = 5,
+    shuffle = True, 
+    random_state = 42
+)
+
+metrics = ["accuracy", "precision", "recall", "f1"]
+# loop through models
+for name, model in models.items():
+    print({model})
+
+    for metric in metrics:
+        scores = cross_val_score(
+            model,
+            x_train,
+            y_train,
+            cv = cv,
+            scoring = metric)
+
+        print(f"{metric}:\n mean : {scores.mean():.3f} standard deviation : {scores.std():.3f}")
+
+'''
+OUTPUT:
+LogisticRegression(max_iter=1000):
+ mean : 0.794 standard deviation : 0.027
+RandomForestClassifier(random_state=42):
+ mean : 0.808 standard deviation : 0.022
+'''
+'''
+OUTPUT:
+{LogisticRegression(max_iter=1000)}
+accuracy:
+ mean : 0.794 standard deviation : 0.027
+precision:
+ mean : 0.747 standard deviation : 0.049
+recall:
+ mean : 0.703 standard deviation : 0.041
+f1:
+ mean : 0.723 standard deviation : 0.033
+{RandomForestClassifier(random_state=42)}
+accuracy:
+ mean : 0.808 standard deviation : 0.022
+precision:
+ mean : 0.762 standard deviation : 0.045
+recall:
+ mean : 0.729 standard deviation : 0.031
+f1:
+ mean : 0.744 standard deviation : 0.026
+ '''
+
+ 
 
 """
 Iteration	name	              model
