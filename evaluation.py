@@ -39,7 +39,7 @@ ConfusionMatrixDisplay.from_estimator(
     display_labels=["did not survive", "survived"]
 )
 plt.title("Confusion Matrix — Logistic Regression Model")
-plt.save("plot/confusion_matrix_log_model")
+plt.savefig("plot/confusion_matrix_log_model")
 
 
 # confusion matrix for random forest model
@@ -50,7 +50,7 @@ ConfusionMatrixDisplay.from_estimator(
     display_labels=["did not survive","survived"]
 )
 plt.title("Confusion Matrix — Random Forest Model")
-plt.save("plot/confusion_matrix_rf_model")
+plt.savefig("plot/confusion_matrix_rf_model")
 plt.show()
 
 
