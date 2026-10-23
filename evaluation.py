@@ -82,7 +82,7 @@ sns.barplot(
     y = importance.index
 )
 plt.xlabel("Importance score")
-plt.ylable("Feature")
+plt.ylabel("Feature")
 plt.title("Feature importance in Random Forest")
 plt.savefig("plot/feature_importance.png")
 plt.show()
