@@ -59,3 +59,16 @@ Model	               Training accuracy	Testing accuracy	Gap
 Logistic Regression	   80.76%	            80.45%	            0.31 percentage points
 Random Forest	       98.17%	            80.45%	            17.72 percentage points
 '''
+
+#test on a passenger
+passenger = pd.DataFrame(
+    [[1,1,22,0,0,80,0,0]],
+    columns = x_train.columns
+)
+
+print("→ Logistic regression: ", log_model.predict(passenger))
+print("→ Random forest: ", rf_model.predict(passenger))
+
+#save models
+joblib.dump(log_model, "models/log_model.pkl")
+joblib.dump(rf_model, "models/rf_modle.pkl")
